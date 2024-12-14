@@ -10,16 +10,85 @@
         body {
             font-family: 'Comic Neue', cursive;
             background-color: #ffd1dc; /* Full pink background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .instructions {
+            position: absolute;
+            top: 10%;
+            text-align: center;
+            font-size: 1.5em;
+            color: #4a4a4a;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: #e94d67;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 150px;
+            background: #f6a8ba;
+            border-radius: 0 0 150px 150px;
+            transform-origin: top;
+            transform: rotateX(0deg);
+            transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .envelope.open .flap {
+            transform: rotateX(-180deg);
+        }
+
+        .base {
+            width: 300px;
+            height: 150px;
+            background: #e94d67;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .message {
+            display: none;
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffd1dc; /* Light pink background */
             color: #4a4a4a;
             line-height: 1.8;
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             padding: 40px;
-            font-weight: bold; /* Make the font bold */
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            font-weight: bold;
+            font-family: 'Comic Neue', cursive;
+            overflow-y: auto;
+            max-height: 80vh;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
-        
+
+        .message.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         h1 {
             font-family: 'Comic Neue', cursive;
             color: #d81b60;
@@ -29,36 +98,66 @@
             margin-bottom: 30px;
             font-weight: bold; /* Make heading bold */
         }
-        
+
         p {
             margin: 15px 0;
             font-size: 1.1em;
-            color: #4a4a4a;
-            font-weight: bold; /* Make paragraphs bold */
+        }
+
+        audio {
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
-    <h1>Merry Christmas & Happy New Year!</h1>
-    <p>Hello! Merry Christmas and advance Happy New Year!</p>
+    <div class="instructions">Click on the envelope to open it!</div>
 
-    <p>Binati na kita since I don't think I'll still be able to greet you after this message. I hope that even though we may no longer have communication, you won't think of me as someone who brings you pain whenever you remember my name.</p>
+    <!-- Envelope structure -->
+    <div class="envelope" onclick="openEnvelope()">
+        <div class="flap"></div>
+        <div class="base"></div>
+    </div>
 
-    <p>I just wanted to say thank you for everything, and I don't regret anything that happened between us. I believe everything happens for a reason, and one of the best things that ever happened to me was meeting you. I will never regret something that once made me so happy.</p>
+    <!-- Message content -->
+    <div class="message" id="message">
+        <h1>Merry Christmas & Happy New Year!</h1>
+        <p>Hello Luis! Merry Christmas and advance Happy New Year!</p>
 
-    <p>I also want to clarify something. I didn't block you, dahil lang gusto ko lang. I have my reasons. I've come to the realization that ever since from the start, ako naman talaga ang problema, sa akin naman talaga nagsimula lahat, and I've been really guilty about that. I've blocked you because sometimes I can't help myself to check up on you or to ask if you're okay, and alam kong hindi na dapat ako ganoon since we've already broken up.</p>
+        <p>Binati na kita since I don't think I'll still be able to greet you after this message. I hope that even though we may no longer have communication, you won't think of me as someone who brings you pain whenever you remember my name.</p>
 
-    <p>All of the complications started from me, and I will take all the accountability. I was the other woman from the start pa lang naman since I've ruined your plans with Anicah (sorry for bringing this up again). Doon pa lang talagang hindi na magwwork yung relationship natin since we've hurt other people. In fact, we've hurt SO MANY PEOPLE in our lives, and I think we're being selfish, fighting for our relationship just because we love each other lang. Hindi kasi applicable in every situation eh, maraming instances tayong dapat iconsider.</p>
+        <p>I just wanted to say thank you for everything, and I don't regret anything that happened between us. I believe everything happens for a reason, and one of the best things that ever happened to me was meeting you. I will never regret something that once made me so happy.</p>
 
-    <p>I'm sorry for everything I have caused you, and I meant this apology with all my heart. Sana maging okay ka na at maging masaya ang Pasko mo, love. Please live your life to the fullest without me, and never ever think to end your life no matter what happens. Maybe we don't know what the future holds, but the present is in our hands, and it's up to us to make the right choices. The decision is ours to make.</p>
+        <p>I also want to clarify something. I didn't block you, dahil lang gusto ko lang. I have my reasons. I've come to the realization that ever since from the start, ako naman talaga ang problema, sa akin naman talaga nagsimula lahat, and I've been really guilty about that. I've blocked you because sometimes I can't help myself to check up on you or to ask if you're okay, and alam kong hindi na dapat ako ganoon since we've already broken up.</p>
 
-    <p>I'll always be here rooting for you, even from afar. Don't forget that I'm proud of you for making it this far.</p>
+        <p>All of the complications started from me, and I will take all the accountability. I was the other woman from the start pa lang naman since I've ruined your plans with Anicah (sorry for bringing this up again). Doon pa lang talagang hindi na magwwork yung relationship natin since we've hurt other people. In fact, we've hurt SO MANY PEOPLE in our lives, and I think we're being selfish, fighting for our relationship just because we love each other lang. Hindi kasi applicable in every situation eh, maraming instances tayong dapat iconsider.</p>
 
-    <p>This song reminds me of you:</p>
-    <audio controls autoplay loop>
-        <source src="https://raw.githubusercontent.com/elleven11-seven/message/15fa3e514728d7f635aa69ce4eeee7765f7a887a/assets/audio/Meaningful%20Silence.mp3"type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+        <p>I'm sorry for everything I have caused you, and I meant this apology with all my heart. Sana maging okay ka na at maging masaya ang Pasko mo, love. Please live your life to the fullest without me, and never ever think to end your life no matter what happens. Maybe we don't know what the future holds, but the present is in our hands, and it's up to us to make the right choices. The decision is ours to make.</p>
+
+        <p>I'll always be here rooting for you, even from afar. Don't forget that I'm proud of you for making it this far.</p>
+
+        <p>This song reminds me of you:</p>
+        <audio controls autoplay loop>
+            <source src="https://raw.githubusercontent.com/elleven11-seven/message/15fa3e514728d7f635aa69ce4eeee7765f7a887a/assets/audio/Meaningful%20Silence.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            const envelope = document.querySelector('.envelope');
+            const message = document.querySelector('.message');
+            const instructions = document.querySelector('.instructions');
+
+            envelope.classList.add('open');
+            setTimeout(() => {
+                envelope.style.display = 'none';
+                instructions.style.display = 'none';
+                message.classList.add('show');
+            }, 1500); 
+        }
+    </script>
 </body>
 </html>
+
 
